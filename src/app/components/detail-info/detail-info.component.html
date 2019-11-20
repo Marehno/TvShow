@@ -3,4 +3,5 @@
 <h3>{{show.label}}</h3>
 
 <img [src]="show.img">
+<p *ngFor="show.img">Genre: </p>
 <p [innerHTML] = 'show.summary'></p>
