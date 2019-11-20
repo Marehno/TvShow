@@ -11,10 +11,6 @@ export class FormComponent implements OnInit {
 
   public id: number;
   public label: string;
-  public genre: string;
-  public fsk: number;
-
-
 
   constructor(public service: TvShowsService) {
 

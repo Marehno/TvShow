@@ -14,10 +14,16 @@
   </tr>
   <tr>
     <td>Bezeichnung</td>
-    <td><input type="text" class="form-control" id="labelInput" name="labelInput" placeholder="Game Of Thrones"
+    <td><input type="text" class="form-control" id="labelInput" name="labelInput" placeholder="Breaking Bad"
                [(ngModel)]="label">
+    </td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>
+      <button class="btn btn-success" (click)="save()">Speichern</button>
     </td>
   </tr>
   </tbody>
 </table>
-<button class="btn btn-primary" (click)="save()">Speichern</button>
+

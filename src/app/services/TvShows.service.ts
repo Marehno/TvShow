@@ -12,10 +12,10 @@ export class TvShowsService {
 
   constructor(private httpClient: HttpClient) {
     this.shows.push(new TvShows(1, '4 BLOCKS'));
-    this.shows.push(new TvShows(1, 'Game Of Thrones'));
-    this.shows.push(new TvShows(1, 'Prison Break'));
-    this.shows.push(new TvShows(1, 'Naruto Shippuden'));
-    this.shows.push(new TvShows(1, 'Das Serien'));
+    this.shows.push(new TvShows(2, 'Breaking Bad'));
+    this.shows.push(new TvShows(3, 'Prison Break'));
+    this.shows.push(new TvShows(4, 'Your Name'));
+    this.shows.push(new TvShows(5, 'Das Serien'));
   }
 
   get tvShows() {
