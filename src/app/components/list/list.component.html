@@ -7,10 +7,10 @@
   <th>Löschen</th>
   </thead>
   <tbody>
-  <tr *ngFor="let shows of tvShows" (click)="detailInfo(shows)">
-    <td >{{shows.id}}</td>
-    <td>{{shows.label}}</td>
-    <td><button class="btn btn-danger" (click)="del(shows)">del</button></td>
+  <tr *ngFor="let show of shows | async" (click)="detailInfo(show)">
+    <td >{{show.id}}</td>
+    <td>{{show.label}}</td>
+    <td><button class="btn btn-danger" (click)="del(show)">del</button></td>
   </tr>
   </tbody>
 </table>

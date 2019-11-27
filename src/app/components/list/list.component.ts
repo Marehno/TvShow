@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {TvShows} from '../../modules/TvShows';
 import {TvShowsService} from '../../services/TvShows.service';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-list',
@@ -12,8 +13,8 @@ export class ListComponent implements OnInit {
   constructor(public service: TvShowsService) {
 
   }
-  get tvShows() {
-    return this.service.tvShows;
+  get shows(): Observable<TvShows[]> {
+    return this.service.shows;
   }
 
   ngOnInit() {

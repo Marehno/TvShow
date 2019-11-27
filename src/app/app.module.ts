@@ -5,7 +5,10 @@ import { AppComponent } from './app.component';
 import { ListComponent } from './components/list/list.component';
 import { FormComponent } from './components/form/form.component';
 import {HttpClientModule} from '@angular/common/http';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { DetailInfoComponent } from './components/detail-info/detail-info.component';
+import {environment} from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -17,7 +20,9 @@ import { DetailInfoComponent } from './components/detail-info/detail-info.compon
   imports: [
     BrowserModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule
   ],
   providers: [],
   bootstrap: [AppComponent]

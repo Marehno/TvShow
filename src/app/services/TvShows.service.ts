@@ -1,37 +1,39 @@
 import { Injectable } from '@angular/core';
 import {TvShows} from '../modules/TvShows';
 import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {AngularFirestore} from '@angular/fire/firestore';
+import {getLocaleId} from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TvShowsService {
 
-  private shows: TvShows[] = [];
+  shows: Observable<any>;
   detailShow: TvShows;
 
-  constructor(private httpClient: HttpClient) {
-    this.shows.push(new TvShows(1, '4 BLOCKS'));
-    this.shows.push(new TvShows(2, 'Breaking Bad'));
-    this.shows.push(new TvShows(3, 'Prison Break'));
-    this.shows.push(new TvShows(4, 'Kimi no na wa'));
-  }
-
-  get tvShows() {
-    return this.shows;
+  constructor(private httpClient: HttpClient, private af: AngularFirestore) {
+    this.shows = af.collection('shows').valueChanges({idField: 'id'});
   }
 
   del(game: TvShows) {
-    this.shows = this.shows.filter(t => t !== game);
+    this.af.collection('shows').doc(game.id).delete();
   }
-  async save(id: number, label: string) {
+  async save(id: number, label: string): Promise<boolean> {
     try {
-      if (id === null) {
+      if (getLocaleId(String(id)) === null) {
         alert('Bitte geben Sie eine ID an!');
       } else {
-        const data = await this.httpClient.get('http://api.tvmaze.com/singlesearch/shows?q=' + label).toPromise();
-        label = data['name'];
-        this.shows.push(new TvShows(id, label));
+        const data: any = await this.httpClient.get('http://api.tvmaze.com/singlesearch/shows?q=' + label).toPromise();
+        if (data.name && data.id) {
+          this.af.collection('shows').add({
+            label: data.name,
+            id: data.id,
+          });
+          label = '';
+          return true;
+        }
       }
     } catch (e) {
       alert('Sie wollten ' + label + ' hinzufügen die es gar nicht gibt');
